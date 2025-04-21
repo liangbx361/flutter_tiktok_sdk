@@ -16,8 +16,13 @@ class TikTokEntryActivity : Activity(), IApiEventHandler {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        tikTokOpenApi = TikTokOpenApiFactory.create(this)
-        tikTokOpenApi.handleIntent(intent, this)
+        try {
+            tikTokOpenApi = TikTokOpenApiFactory.create(this)
+            tikTokOpenApi.handleIntent(intent, this)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            finish()
+        }
     }
 
     override fun onReq(req: BaseReq) {
